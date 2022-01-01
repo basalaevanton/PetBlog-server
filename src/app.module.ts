@@ -1,10 +1,17 @@
+import { UserModule } from './user/user.module';
+import { PostModule } from './post/post.module';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
+  imports: [
+    UserModule,
+    PostModule,
+    MongooseModule.forRoot(
+      'mongodb+srv://root:root@cluster0.c8wf3.mongodb.net/PetBlog?retryWrites=true&w=majority',
+    ),
+  ],
 })
 export class AppModule {}
