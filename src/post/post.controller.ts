@@ -46,6 +46,7 @@ export class PostController {
     return this.postService.getAll(count, offset);
   }
 
+  @ApiOperation({ summary: 'Получение поста по ID' })
   @ApiResponse({
     status: 200,
     description: 'The found record',

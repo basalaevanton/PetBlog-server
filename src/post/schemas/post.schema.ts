@@ -25,6 +25,12 @@ export class Post {
   user: string;
 
   @ApiProperty({
+    description: 'title your post',
+  })
+  @Prop()
+  title: string;
+
+  @ApiProperty({
     description: 'text of your post',
   })
   @Prop()

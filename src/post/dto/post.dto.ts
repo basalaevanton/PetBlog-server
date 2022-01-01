@@ -5,6 +5,12 @@ export class CreatePostDto {
   readonly user: string;
 
   @ApiProperty({
+    example: 'Первый пост',
+    description: 'Название поста',
+  })
+  readonly title: string;
+
+  @ApiProperty({
     example: 'привет это первый пост',
     description: 'текст поста',
   })
