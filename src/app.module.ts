@@ -1,3 +1,4 @@
+import { CommentModule } from './comment/comment.module';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { Module } from '@nestjs/common';
@@ -7,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   controllers: [],
   providers: [],
   imports: [
+    CommentModule,
     UserModule,
     PostModule,
     MongooseModule.forRoot(

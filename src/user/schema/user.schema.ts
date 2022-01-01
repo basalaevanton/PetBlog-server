@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 import { Post } from 'src/post/schemas/post.schema';
-import { Comment } from 'src/post/schemas/comment.schema';
+import { Comment } from 'src/comment/schema/comment.schema';
 
 export type UserDocument = User & Document;
 

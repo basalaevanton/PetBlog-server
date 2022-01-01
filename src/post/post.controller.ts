@@ -18,11 +18,11 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ObjectId } from 'mongoose';
-import { CreateCommentDto } from './dto/createComment.dto';
+import { CreateCommentDto } from '../comment/dto/createComment.dto';
 import { CreatePostDto } from './dto/post.dto';
 import { PostService } from './post.service';
 import { Post as PostResponse } from './schemas/post.schema';
-import { Comment } from './schemas/comment.schema';
+import { Comment } from '../comment/schema/comment.schema';
 
 @ApiTags('Posts')
 @Controller('/posts')
@@ -74,23 +74,4 @@ export class PostController {
   // deleteAll() {
   //   return this.postService.deleteAll();
   // }
-
-  @ApiOperation({ summary: 'Добавить комментарий для поста' })
-  @ApiCreatedResponse({
-    description: 'Комментарий был записан на сервер',
-    type: Comment,
-  })
-  @Post('/comment')
-  addComment(@Body() dto: CreateCommentDto) {
-    return this.postService.addComment(dto);
-  }
-
-  @ApiOperation({ summary: 'Удалить комментарий для поста' })
-  @ApiCreatedResponse({
-    description: 'Комментарий был удален',
-  })
-  @Delete('/comment/:id')
-  deleteComment(@Param('id') id: ObjectId) {
-    return this.postService.deleteComment(id);
-  }
 }

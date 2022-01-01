@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 
-import { Post } from './post.schema';
+import { Post } from '../../post/schemas/post.schema';
 import { User } from 'src/user/schema/user.schema';
 import { ApiProperty } from '@nestjs/swagger';
 

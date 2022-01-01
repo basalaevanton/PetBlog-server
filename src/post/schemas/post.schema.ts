@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
 import { User } from 'src/user/schema/user.schema';
-import { Comment } from 'src/post/schemas/comment.schema';
+import { Comment } from 'src/comment/schema/comment.schema';
 
 export type PostDocument = Post & Document;
 
