@@ -14,14 +14,15 @@ import {
 import {
   ApiCreatedResponse,
   ApiOperation,
-  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { ObjectId } from 'mongoose';
+import { CreateCommentDto } from './dto/createComment.dto';
 import { CreatePostDto } from './dto/post.dto';
 import { PostService } from './post.service';
 import { Post as PostResponse } from './schemas/post.schema';
+import { Comment } from './schemas/comment.schema';
 
 @ApiTags('Posts')
 @Controller('/posts')
@@ -45,22 +46,22 @@ export class PostController {
     return this.postService.getAll(count, offset);
   }
 
-  @Get(':id')
   @ApiResponse({
     status: 200,
     description: 'The found record',
     type: PostResponse,
   })
+  @Get(':id')
   getOne(@Param('id') id: ObjectId) {
     return this.postService.getOne(id);
   }
 
-  @Delete(':id')
   @ApiOperation({ summary: 'Удаление поста по ID' })
   @ApiResponse({
     status: 200,
     description: 'Пост был удален',
   })
+  @Delete(':id')
   delete(@Param('id') id: ObjectId) {
     return this.postService.delete(id);
   }
@@ -73,4 +74,23 @@ export class PostController {
   // deleteAll() {
   //   return this.postService.deleteAll();
   // }
+
+  @ApiOperation({ summary: 'Добавить комментарий для поста' })
+  @ApiCreatedResponse({
+    description: 'Комментарий был записан на сервер',
+    type: Comment,
+  })
+  @Post('/comment')
+  addComment(@Body() dto: CreateCommentDto) {
+    return this.postService.addComment(dto);
+  }
+
+  @ApiOperation({ summary: 'Удалить комментарий для поста' })
+  @ApiCreatedResponse({
+    description: 'Комментарий был удален',
+  })
+  @Delete('/comment/:id')
+  deleteComment(@Param('id') id: ObjectId) {
+    return this.postService.deleteComment(id);
+  }
 }

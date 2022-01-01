@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { User, UserDocument } from 'src/user/schema/user.schema';
+import { CreateCommentDto } from './dto/createComment.dto';
 import { CreatePostDto } from './dto/post.dto';
 import { Comment, CommentDocument } from './schemas/comment.schema';
 import { Post, PostDocument } from './schemas/post.schema';
@@ -61,4 +62,19 @@ export class PostService {
 
   //   return postDelete;
   // }
+
+  async addComment(dto: CreateCommentDto): Promise<Comment> {
+    const post = await this.postModel.findById(dto.postId);
+    const comment = await this.commentModel.create({ ...dto, likes: 0 });
+    post.comments.push(comment._id);
+    await post.save();
+
+    return comment;
+  }
+
+  async deleteComment(id: ObjectId): Promise<ObjectId> {
+    const commentDelete = await this.commentModel.findOneAndDelete(id);
+
+    return commentDelete._id;
+  }
 }
