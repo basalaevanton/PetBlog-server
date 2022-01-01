@@ -2,7 +2,75 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Controller } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
+import {
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { ObjectId } from 'mongoose';
+import { CreatePostDto } from './dto/post.dto';
+import { PostService } from './post.service';
+import { Post as PostResponse } from './schemas/post.schema';
 
-@Controller()
-export class PostController {}
+@ApiTags('Posts')
+@Controller('/posts')
+export class PostController {
+  constructor(private postService: PostService) {}
+
+  @ApiOperation({ summary: 'Создание постов' })
+  @ApiCreatedResponse({
+    description: 'Пост был записан на сервер',
+    type: PostResponse,
+  })
+  @Post()
+  create(@Body() dto: CreatePostDto) {
+    return this.postService.create(dto);
+  }
+
+  @ApiOperation({ summary: 'Получение постов по странично' })
+  @ApiResponse({ status: 200, type: [PostResponse] })
+  @Get()
+  getAll(@Query('count') count: number, @Query('offset') offset: number) {
+    return this.postService.getAll(count, offset);
+  }
+
+  @Get(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'The found record',
+    type: PostResponse,
+  })
+  getOne(@Param('id') id: ObjectId) {
+    return this.postService.getOne(id);
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: 'Удаление поста по ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Пост был удален',
+  })
+  delete(@Param('id') id: ObjectId) {
+    return this.postService.delete(id);
+  }
+
+  // @Delete()
+  // @ApiResponse({
+  //   status: 200,
+  //   description: 'Посты был удален',
+  // })
+  // deleteAll() {
+  //   return this.postService.deleteAll();
+  // }
+}

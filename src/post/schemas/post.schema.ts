@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
+import { ApiProperty } from '@nestjs/swagger';
+
 import { User } from 'src/user/schema/user.schema';
 import { Comment } from 'src/post/schemas/comment.schema';
 
@@ -8,24 +10,44 @@ export type PostDocument = Post & Document;
 
 @Schema()
 export class Post {
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
-  User: User;
+  //   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
+  //   User: User;
 
+  @ApiProperty({
+    description: 'ID of User',
+  })
+  _id: mongoose.ObjectId;
+
+  @ApiProperty({
+    description: 'name of User',
+  })
   @Prop()
-  artist: string;
+  user: string;
 
+  @ApiProperty({
+    description: 'text of your post',
+  })
   @Prop()
   text: string;
 
+  @ApiProperty({
+    description: 'Date of post',
+  })
   @Prop()
-  listens: number;
+  date: Date;
 
+  @ApiProperty({
+    description: 'Likes of post',
+  })
   @Prop()
-  picture: string;
+  likes: number;
 
-  @Prop()
-  audio: string;
+  //   @Prop()
+  //   picture: string;
 
+  @ApiProperty({
+    description: 'Comments of post',
+  })
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }] })
   comments: Comment[];
 }

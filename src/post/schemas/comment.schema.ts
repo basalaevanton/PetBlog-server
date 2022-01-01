@@ -18,8 +18,8 @@ export class Comment {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Post' })
   post: Post;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  user: User;
+  //   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  //   user: User;
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment);
