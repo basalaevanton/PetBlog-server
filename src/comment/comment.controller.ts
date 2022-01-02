@@ -28,7 +28,7 @@ export class CommentController {
   @ApiCreatedResponse({
     description: 'Комментарий был удален',
   })
-  @Delete('/comment/:id')
+  @Delete('/:id')
   deleteComment(@Param('id') id: ObjectId) {
     return this.commentService.deleteComment(id);
   }
