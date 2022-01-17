@@ -1,5 +1,5 @@
 import { CommentModule } from './comment/comment.module';
-import { UserModule } from './user/user.module';
+
 import { PostModule } from './post/post.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -9,7 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   providers: [],
   imports: [
     CommentModule,
-    UserModule,
+
     PostModule,
     MongooseModule.forRoot(
       'mongodb+srv://root:root@cluster0.c8wf3.mongodb.net/PetBlog?retryWrites=true&w=majority',
