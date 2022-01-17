@@ -5,7 +5,7 @@ https://docs.nestjs.com/providers#services
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
-import { User, UserDocument } from 'src/user/schema/user.schema';
+
 
 import { CreatePostDto } from './dto/post.dto';
 import { Comment, CommentDocument } from '../comment/schema/comment.schema';

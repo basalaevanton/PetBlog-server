@@ -8,7 +8,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Post, PostSchema } from './schemas/post.schema';
 import { Comment, CommentSchema } from '../comment/schema/comment.schema';
-import { User, UserSchema } from 'src/user/schema/user.schema';
+
 
 @Module({
   imports: [
